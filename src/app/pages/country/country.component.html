@@ -1,30 +1,44 @@
-<div>
-  <div>
-    <div class="center">
-      <div>{{ titlePage }}</div>
-    </div>
-    <div class="split">
-      <div>
-        <p>Number of entries</p>
-        <p>{{ totalEntries }}</p>
-      </div>
-      <div>
-        <p>Total Number of medals</p>
-        <p>{{ totalMedals }}</p>
-      </div>
-      <div>
-        <p>Total Number of athletes</p>
-        <p>{{ totalAthletes }}</p>
-      </div>
-    </div>
-  </div>
-  <div class="chart-container wrapper-container">
-    <div class="container">
-      <canvas id="countryChart">{{ lineChart }}</canvas>
-      <h2>Date</h2>
-    </div>
-  </div>
-  <div class="center">
-    <a routerLink="">Go back</a>
-  </div>
+<!-- État LOADING -->
+<div *ngIf="loading" class="loading-state">
+  <p>Chargement des données...</p>
 </div>
+
+<!-- État ERROR -->
+<div *ngIf="error && !loading" class="error-state">
+  <p class="error-message">{{ error }}</p>
+  <button (click)="onRetry()" class="retry-button">Réessayer</button>
+</div>
+
+<!-- État DATA : structure identique à l'originale -->
+<ng-container *ngIf="!loading && !error">
+  <div>
+    <div>
+      <div class="center">
+        <div>{{ titlePage }}</div>
+      </div>
+      <div class="split">
+        <div>
+          <p>Number of entries</p>
+          <p>{{ totalEntries }}</p>
+        </div>
+        <div>
+          <p>Total Number of medals</p>
+          <p>{{ totalMedals }}</p>
+        </div>
+        <div>
+          <p>Total Number of athletes</p>
+          <p>{{ totalAthletes }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="chart-container wrapper-container">
+      <div class="container">
+        <canvas id="countryChart">{{ lineChart }}</canvas>
+        <h2>Date</h2>
+      </div>
+    </div>
+    <div class="center">
+      <a routerLink="">Go back</a>
+    </div>
+  </div>
+</ng-container>
