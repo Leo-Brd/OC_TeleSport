@@ -14,21 +14,7 @@
   <h2>Olympic games app</h2>
   <hr/>
   <div>
-    <div>
-      <div class="center">
-        <div>Medals per Country</div>
-      </div>
-      <div class="split">
-        <div>
-          <p>Number of countries</p>
-          <p>{{ headerIndicators[0].value }}</p>
-        </div>
-        <div>
-          <p>Number of JOs</p>
-          <p>{{ headerIndicators[1].value }}</p>
-        </div>
-      </div>
-    </div>
+    <app-header [title]="'Medals per Country'" [indicators]="headerIndicators"></app-header>
     <canvas id="DashboardPieChart"></canvas>
   </div>
 </ng-container>

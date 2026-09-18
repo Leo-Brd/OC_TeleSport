@@ -3,7 +3,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import Chart from 'chart.js/auto';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 import { DataService } from '../../services/data.service';
-import { Olympic } from '../../models/olympic.model';
+import { Olympic, Indicator } from '../../models/olympic.model';
+import { APP_CONSTANTS } from '../../constants/app.constants';
 
 @Component({
   selector: 'app-country',
@@ -16,6 +17,7 @@ export class CountryComponent implements OnInit, OnDestroy {
   totalEntries: number = 0;
   totalMedals: number = 0;
   totalAthletes: number = 0;
+  headerIndicators: Indicator[] = [];
 
   loading: boolean = true;
   error: string | null = null;
@@ -64,6 +66,7 @@ export class CountryComponent implements OnInit, OnDestroy {
           this.totalEntries = selectedCountry.participations.length;
           this.totalMedals = this.dataService.getTotalMedals(selectedCountry.participations);
           this.totalAthletes = this.dataService.getTotalAthletes(selectedCountry.participations);
+          this.setupIndicators();
           this.buildChart(selectedCountry);
           this.loading = false;
         },
@@ -73,6 +76,14 @@ export class CountryComponent implements OnInit, OnDestroy {
           console.error('Erreur:', err);
         }
       });
+  }
+
+  private setupIndicators(): void {
+    this.headerIndicators = [
+      { label: APP_CONSTANTS.NUMBER_OF_ENTRIES, value: this.totalEntries },
+      { label: APP_CONSTANTS.TOTAL_MEDALS, value: this.totalMedals },
+      { label: APP_CONSTANTS.TOTAL_ATHLETES, value: this.totalAthletes }
+    ];
   }
 
   private buildChart(country: Olympic): void {

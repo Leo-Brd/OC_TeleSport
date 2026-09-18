@@ -1,12 +1,9 @@
-<div class="header-container">
-  <div class="header-title">
-    <h2>{{ title }}</h2>
-  </div>
-  
-  <div class="indicators-container">
-    <div class="indicator" *ngFor="let indicator of indicators">
-      <p class="indicator-label">{{ indicator.label }}</p>
-      <p class="indicator-value">{{ indicator.value }}</p>
-    </div>
+<div class="center">
+  <div>{{ title }}</div>
+</div>
+<div class="split">
+  <div *ngFor="let indicator of indicators">
+    <p>{{ indicator.label }}</p>
+    <p>{{ indicator.value }}</p>
   </div>
 </div>

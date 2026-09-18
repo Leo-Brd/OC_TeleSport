@@ -24,7 +24,7 @@ describe('HeaderComponent', () => {
   it('should display title', () => {
     component.title = 'Test Title';
     fixture.detectChanges();
-    const element = fixture.nativeElement.querySelector('h2');
+    const element = fixture.nativeElement.querySelector('.center div');
     expect(element.textContent).toBe('Test Title');
   });
 
@@ -35,7 +35,7 @@ describe('HeaderComponent', () => {
     ];
     component.indicators = testIndicators;
     fixture.detectChanges();
-    const indicatorElements = fixture.nativeElement.querySelectorAll('.indicator');
+    const indicatorElements = fixture.nativeElement.querySelectorAll('.split > div');
     expect(indicatorElements.length).toBe(2);
   });
 });
