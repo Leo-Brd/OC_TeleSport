@@ -1,0 +1,36 @@
+.loading-state {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.error-state {
+  text-align: center;
+  padding: 2rem;
+  background-color: #ffe0e0;
+  border: 2px solid #e74c3c;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.error-message {
+  color: #c0392b;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.retry-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #0b868f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0a6f7a;
+  }
+}

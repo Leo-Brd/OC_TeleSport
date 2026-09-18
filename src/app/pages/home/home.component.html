@@ -1,20 +1,34 @@
-<h2>Olympic games app</h2>
-<hr/>
-<div>
-  <div>
-    <div class="center">
-      <div>{{ titlePage }}</div>
-    </div>
-    <div class="split">
-      <div>
-        <p>Number of countries</p>
-        <p>{{ totalCountries }}</p>
-      </div>
-      <div>
-        <p>Number of JOs</p>
-        <p>{{ totalJOs }}</p>
-      </div>
-    </div>
-  </div>
-  <canvas id="DashboardPieChart">{{ pieChart }}</canvas>
+<!-- État LOADING -->
+<div *ngIf="loading" class="loading-state">
+  <p>Chargement des données...</p>
 </div>
+
+<!-- État ERROR -->
+<div *ngIf="error && !loading" class="error-state">
+  <p class="error-message">{{ error }}</p>
+  <button (click)="onRetry()" class="retry-button">Réessayer</button>
+</div>
+
+<!-- État DATA : structure identique à l'originale -->
+<ng-container *ngIf="!loading && !error">
+  <h2>Olympic games app</h2>
+  <hr/>
+  <div>
+    <div>
+      <div class="center">
+        <div>Medals per Country</div>
+      </div>
+      <div class="split">
+        <div>
+          <p>Number of countries</p>
+          <p>{{ headerIndicators[0].value }}</p>
+        </div>
+        <div>
+          <p>Number of JOs</p>
+          <p>{{ headerIndicators[1].value }}</p>
+        </div>
+      </div>
+    </div>
+    <canvas id="DashboardPieChart"></canvas>
+  </div>
+</ng-container>
