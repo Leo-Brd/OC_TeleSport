@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import Chart from 'chart.js/auto';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, fromEvent, debounceTime, takeUntil } from 'rxjs';
 import { DataService } from '../../services/data.service';
 import { Olympic, Indicator } from '../../models/olympic.model';
-import { APP_CONSTANTS } from '../../constants/app.constants';
+import { APP_CONSTANTS, getResponsiveAspectRatio } from '../../constants/app.constants';
 
 @Component({
   selector: 'app-home',
@@ -31,6 +31,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadData();
+
+    fromEvent(window, 'resize')
+      .pipe(debounceTime(150), takeUntil(this.destroy$))
+      .subscribe(() => {
+        if (this.pieChart) {
+          this.pieChart.options.aspectRatio = getResponsiveAspectRatio(window.innerWidth);
+          this.pieChart.resize();
+        }
+      });
   }
 
   ngOnDestroy(): void {
@@ -96,7 +105,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           ]
         },
         options: {
-          aspectRatio: 2.5,
+          aspectRatio: getResponsiveAspectRatio(window.innerWidth),
           onClick: (e) => {
             if (e.native) {
               const points = pieChart.getElementsAtEventForMode(

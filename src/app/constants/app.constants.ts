@@ -20,3 +20,14 @@ export const APP_CONSTANTS = {
     DESKTOP: 1200     // >= 1200px
   }
 };
+
+// Ratio largeur/hauteur des graphiques Chart.js selon la largeur d'écran
+export function getResponsiveAspectRatio(windowWidth: number): number {
+  if (windowWidth < APP_CONSTANTS.BREAKPOINTS.MOBILE) {
+    return 1;
+  }
+  if (windowWidth < APP_CONSTANTS.BREAKPOINTS.DESKTOP) {
+    return 1.8;
+  }
+  return 2.5;
+}

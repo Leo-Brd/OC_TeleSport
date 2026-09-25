@@ -42,3 +42,18 @@
     }
 }
 
+// Tablette (768-1199px) : les indicateurs passent à la ligne si besoin
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    .split {
+        flex-wrap: wrap;
+    }
+}
+
+// Mobile (<=767px) : indicateurs empilés verticalement
+@media screen and (max-width: 767px) {
+    .split {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+

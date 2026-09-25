@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import Chart from 'chart.js/auto';
-import { Subject, switchMap, takeUntil } from 'rxjs';
+import { Subject, fromEvent, debounceTime, switchMap, takeUntil } from 'rxjs';
 import { DataService } from '../../services/data.service';
 import { Olympic, Indicator } from '../../models/olympic.model';
-import { APP_CONSTANTS } from '../../constants/app.constants';
+import { APP_CONSTANTS, getResponsiveAspectRatio } from '../../constants/app.constants';
 
 @Component({
   selector: 'app-country',
@@ -32,6 +32,15 @@ export class CountryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadData();
+
+    fromEvent(window, 'resize')
+      .pipe(debounceTime(150), takeUntil(this.destroy$))
+      .subscribe(() => {
+        if (this.lineChart) {
+          this.lineChart.options.aspectRatio = getResponsiveAspectRatio(window.innerWidth);
+          this.lineChart.resize();
+        }
+      });
   }
 
   ngOnDestroy(): void {
@@ -102,7 +111,7 @@ export class CountryComponent implements OnInit, OnDestroy {
           ]
         },
         options: {
-          aspectRatio: 2.5
+          aspectRatio: getResponsiveAspectRatio(window.innerWidth)
         }
       });
       this.lineChart = lineChart;
