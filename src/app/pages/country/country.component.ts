@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import Chart from 'chart.js/auto';
 import { Subject, fromEvent, debounceTime, switchMap, takeUntil } from 'rxjs';
@@ -79,7 +80,7 @@ export class CountryComponent implements OnInit, OnDestroy {
           this.buildChart(selectedCountry);
           this.loading = false;
         },
-        error: (err: any) => {
+        error: (err: HttpErrorResponse) => {
           this.error = 'Erreur lors du chargement des données';
           this.loading = false;
           console.error('Erreur:', err);

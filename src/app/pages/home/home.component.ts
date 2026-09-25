@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Chart from 'chart.js/auto';
 import { Subject, fromEvent, debounceTime, takeUntil } from 'rxjs';
@@ -66,7 +67,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.loading = false;
           }
         },
-        error: (err: any) => {
+        error: (err: HttpErrorResponse) => {
           this.error = 'Erreur lors du chargement des données';
           this.loading = false;
           console.error('Erreur:', err);
