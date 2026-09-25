@@ -72,6 +72,12 @@ export class CountryComponent implements OnInit, OnDestroy {
             return;
           }
 
+          if (!selectedCountry.participations || selectedCountry.participations.length === 0) {
+            this.error = 'Aucune donnée disponible pour ce pays';
+            this.loading = false;
+            return;
+          }
+
           this.titlePage = selectedCountry.country;
           this.totalEntries = selectedCountry.participations.length;
           this.totalMedals = this.dataService.getTotalMedals(selectedCountry.participations);
