@@ -30,6 +30,9 @@ src/app/
 └── app-routing.module.ts      # Définition des routes
 ```
 
+<img width="2871" height="624" alt="mermaid-diagram-2026-10-02-113406" src="https://github.com/user-attachments/assets/399fa603-3cdc-4d01-b258-06ad2e64156c" />
+
+
 ## 🧩 Composants
 
 | Composant | Rôle | Type |
