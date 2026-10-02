@@ -34,3 +34,9 @@
     background-color: #0a6f7a;
   }
 }
+
+// Limite la taille du pie chart sur grand écran, sans casser le responsive mobile/tablette
+.chart-wrapper {
+  max-width: 1600px;
+  margin: 0 auto;
+}
