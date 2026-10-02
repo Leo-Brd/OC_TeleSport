@@ -132,7 +132,15 @@ Le starter code fonctionne visuellement mais présente **de nombreuses violation
 
 **Réalité :**
 - ❌ HeaderComponent n'existe pas
-- ❌ HTML dupliqué dans `home.component.html` et `country.component.html`
+- ❌ HTML dupliqué dans `home.component.html` (lignes 5-17) et `country.component.html` (lignes 3-19) : même structure `.center` + `.split`, seules les valeurs changent
+
+**Preuve (extrait `home.component.html`, lignes 5-8) :**
+```html
+<div class="center">
+  <div>{{ titlePage }}</div>
+</div>
+<div class="split">
+```
 
 **À faire :**
 - ✅ Créer `HeaderComponent` avec inputs `@Input() title: string` et `@Input() indicators: Indicator[]`
@@ -165,6 +173,8 @@ src/app/
 │   └── header/
 └── shared/             ❌ N'EXISTE PAS
 ```
+
+**Preuve :** constaté en listant `src/app/` (voir arborescence ci-dessus) — seuls `pages/`, `app.module.ts`, `app.component.ts` et `app-routing.module.ts` existent.
 
 **À faire :**
 - ✅ Créer la structure de dossiers appropriée
@@ -232,6 +242,8 @@ src/app/
 - ❌ Pas de message "Aucune donnée"
 - ❌ Pas de message d'erreur à l'utilisateur
 
+**Preuve :** `home.component.ts` ligne 16 déclare `public error!:string` mais ce champ n'est utilisé dans aucun `*ngIf` du template (`home.component.html`) — l'erreur est capturée (lignes 34-36) mais jamais affichée. Aucune propriété `loading` n'existe dans le fichier.
+
 **À faire :**
 - ✅ Créer des états : `loading: boolean`, `error: string | null`, `data: Olympic[] | null`
 - ✅ Afficher UI appropriée pour chaque état
@@ -246,12 +258,12 @@ src/app/
 > Desktop ≥ 1200px : 12 colonnes
 
 **Réalité :**
-- ❌ Aucune media query en SCSS
-- ❌ Layout apparemment figé
-- ❌ Pas de `@media` queries
+- ❌ `styles.scss` et `home.component.scss` : 0 media query
+- ⚠️ `country.component.scss` ligne 15 contient une seule media query isolée (`@media screen and (max-width: 1000px)`), qui ne couvre que `.container` (le graphique) et ne respecte pas les breakpoints des spécifications (768px / 1200px) ni les indicateurs (`.split`)
+- ❌ Pas de breakpoint mobile (≤767px) nulle part
 
 **À faire :**
-- ✅ Implémenter des breakpoints CSS/SCSS
+- ✅ Implémenter des breakpoints CSS/SCSS cohérents avec les specs (768px / 1200px)
 - ✅ Utiliser CSS Grid ou Flexbox responsif
 
 ---
